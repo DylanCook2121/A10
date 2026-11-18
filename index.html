@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A10 Cookies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Welcome to My Cookie Website</h1>
+<p id="message"></p>
+
+<script>
+    function setCookie(name, value) {
+        document.cookie = name + "=" +
+            encodeURIComponent(value) +
+            "; path=/; SameSite=Lax";
+    }
+
+    function getCookie(name) {
+        let cookies = document.cookie.split(";");
+
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+
+            if (cookie.startsWith(name + "=")) {
+                return decodeURIComponent(
+                    cookie.substring(name.length + 1)
+                );
+            }
+        }
+        return "";
+    }
+
+    let username = getCookie("username");
+
+    if (username === "") {
+        username = prompt("Please enter your name:");
+
+        if (username !== null && username.trim() !== "") {
+            setCookie("username", username.trim());
+        }
+    }
+
+    if (username) {
+        document.getElementById("message").textContent =
+            "Welcome back, " + username + "!";
+    }
+</script>
+
+<footer>
+    <p>Copyright &copy; 2026 Dylan Cook | November 17, 2026</p>
+</footer>
+
+</body>
+</html>
